@@ -1,0 +1,18 @@
+pipeline{
+	agent {
+		label {
+			label 'dev'
+			customWorkspace '/mnt/workspace'
+		}
+	}
+	stages {
+		stage ('to clone git repo'){
+			steps {
+				dir ('/mnt/workspace'){
+					sh 'git clone https://github.com/vikasdarade/git.git'
+					sh 'docker cp /mnt/git/index.html 96b15a8890f4:/var/www/html/'
+				}
+			}
+		}
+	}
+}
